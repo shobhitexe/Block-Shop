@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 class MyAccountManager(BaseUserManager):
 
-    def create_user(self ,public_key, email, username, password=None):
+    def create_user(self ,public_key, email, username,password=None):
         if not public_key:
             raise ValueError("Users must have a public key")
 
@@ -39,7 +39,7 @@ class CustomUser(AbstractBaseUser):
     email = models.EmailField(verbose_name="email", max_length=60,unique=True)
     username = models.CharField(max_length=30,unique=True)
     public_key = models.CharField(max_length=150,unique=True,help_text=('Required. your ethereum address..'),error_messages={'unique':("A user with that username already exists."),})
-    # password= models.CharField(max_length=50)   
+ 
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default= False)

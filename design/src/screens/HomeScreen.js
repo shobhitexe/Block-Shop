@@ -15,6 +15,7 @@ function HomeScreen() {
     fetchProducts()
   },[])
   return (
+    <Row>
     <div>
       <h1>Latest Products</h1>
       <Row>
@@ -25,6 +26,7 @@ function HomeScreen() {
         ))}
       </Row>
     </div>
+    </Row>
   );
 }
 

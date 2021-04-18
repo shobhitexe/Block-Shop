@@ -53,6 +53,7 @@ function ProductScreen ({ match, history }) {
             document.getElementById('comment').value
         ))
     }
+    console.log(reviews[0][1])
     // const product= products.find((p) => p._id == match.params.id)
     return (
         <div>

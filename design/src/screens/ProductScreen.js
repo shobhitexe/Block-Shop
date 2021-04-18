@@ -12,6 +12,7 @@ import Message from '../components/Message'
 function ProductScreen ({ match, history }) {
     const [qty, setQty] = useState(1)
     const [comment, setComment] = useState('')
+    const [reviews, setReviews] = useState([])
 
     const dispatch = useDispatch()
 
@@ -41,15 +42,10 @@ function ProductScreen ({ match, history }) {
     const addToCartHandler = () => {
         history.push(`/cart/${match.params.id}?qty=${qty}`)
     }
-
-    const fetch = new Promise((resolve, reject) =>
+    (async() =>
     {
-        loadReview(match.params.id)
-        .then(resolve())
-        .catch(reject())
-    });
-
-    fetch.then((data) => console.log(data))
+        setReviews(await loadReview(match.params.id))
+    })()
     const submitHandler = (e) => {
         e.preventDefault()
         dispatch(createProductReview(

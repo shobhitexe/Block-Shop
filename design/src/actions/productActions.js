@@ -39,9 +39,7 @@ const ReviewContract = new web3.eth.Contract(REVIEW_ABI,REVIEW_ADDRESS)
 
 export const loadReview = async function(product_id)
 {
-    const reviews = await ReviewContract.methods.getReviews(product_id).call()
-    console.log('hi', reviews)
-    return reviews
+    return await ReviewContract.methods.getReviews(product_id).call()
 }
 
 const addReview = async function(public_key,product_id,review)

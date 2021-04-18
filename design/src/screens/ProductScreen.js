@@ -53,7 +53,6 @@ function ProductScreen ({ match, history }) {
             document.getElementById('comment').value
         ))
     }
-    console.log(reviews[0][1])
     // const product= products.find((p) => p._id == match.params.id)
     return (
         <div>
@@ -154,17 +153,15 @@ function ProductScreen ({ match, history }) {
                              <Row>
                                 <Col md={6}>
                                     <h4>Reviews</h4>
-                                    {/* {product.reviews.length === 0 && <Message variant='info'>No Reviews</Message>} */}
+                                    {reviews.length === 0 && <Message variant='info'>No Reviews</Message>}
 
                                     <ListGroup variant='flush'>
-                                        {/* {product.reviews.map((review) => (
-                                            <ListGroup.Item key={review._id}>
-                                                <strong>{review.name}</strong>
-                                                <Rating value={review.rating} color='#f8e825' />
-                                                <p>{review.createdAt.substring(0, 10)}</p>
-                                                <p>{review.comment}</p>
+                                         {reviews.map((review) => (
+                                            <ListGroup.Item key={review[0]}>
+                                                 <strong>{userInfo.username}</strong>
+                                                <p>{review[1]}</p> 
                                             </ListGroup.Item>
-                                        ))} } */}
+                                        ))} 
                                         
                                         <ListGroup.Item>
                                             <h4>Write a review</h4>

@@ -16,6 +16,12 @@ contract Review
         return product_reviews[product_id];
     }
     
+    function getReviewCount(uint product_id) external view returns (uint )
+    {
+        return product_reviews[product_id].length;
+    }
+    
+    
     function addReview(uint product_id , string memory review) external 
     {
         review_tokens[msg.sender][product_id]=false;

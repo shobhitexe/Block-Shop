@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, Image, ListGroup, Button, Card, Form } from 'react-bootstrap'
 import Rating from "../components/Rating";
 import axios from 'axios'
-import { listProductDetails, createProductReview } from '../actions/productActions'
+import { listProductDetails, createProductReview, loadReview } from '../actions/productActions'
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 
-function ProductScreen({ match, history }) {
+function ProductScreen ({ match, history }) {
     const [qty, setQty] = useState(1)
     const [comment, setComment] = useState('')
 
@@ -45,9 +45,8 @@ function ProductScreen({ match, history }) {
     const submitHandler = (e) => {
         e.preventDefault()
         dispatch(createProductReview(
-            match.params.id, {
-            comment
-        }
+            match.params.id,
+            document.getElementById('comment').value
         ))
     }
     // const product= products.find((p) => p._id == match.params.id)

@@ -37,14 +37,20 @@ import { REVIEW_ABI , REVIEW_ADDRESS } from '../config'
 const web3 = new Web3(window.ethereum)
 const ReviewContract = new web3.eth.Contract(REVIEW_ABI,REVIEW_ADDRESS)
 
-const loadReview = async function(product_id,review)
+export const loadReview = async function(product_id)
 {
     const reviews = await ReviewContract.methods.getReviews(product_id).call()
+    console.log(reviews)
 }
 
 const addReview = async function(public_key,product_id,review)
 {
-
+    ReviewContract.methods.addReview(product_id,review)
+    .send({ from: public_key })
+    .once('receipt', async (receipt) => {
+      console.log('transaction complete')
+      console.log(ReviewContract)
+    })
 }
 
 export const listProducts = (keyword = '') => async (dispatch) => {
@@ -246,6 +252,8 @@ export const createProductReview = (productId, review) => async (dispatch, getSt
             userLogin: { userInfo },
         } = getState()
 
+        console.log('hi',userInfo.public_key)
+        await addReview(userInfo.public_key,productId,review)
         // const config = {
         //     headers: {
         //         'Content-type': 'application/json',

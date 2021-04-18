@@ -42,6 +42,14 @@ function ProductScreen ({ match, history }) {
         history.push(`/cart/${match.params.id}?qty=${qty}`)
     }
 
+    const fetch = new Promise((resolve, reject) =>
+    {
+        loadReview(match.params.id)
+        .then(resolve())
+        .catch(reject())
+    });
+
+    fetch.then((data) => console.log(data))
     const submitHandler = (e) => {
         e.preventDefault()
         dispatch(createProductReview(

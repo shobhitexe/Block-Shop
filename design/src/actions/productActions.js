@@ -52,11 +52,11 @@ const addReview = async function(public_key,product_id,review)
     })
 }
 
-export const listProducts = (keyword = '') => async (dispatch) => {
+export const listProducts = () => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_LIST_REQUEST })
 
-        const { data } = await axios.get(`/api/products${keyword}`)
+        const { data } = await axios.get(`/api/products/`)
 
         dispatch({
             type: PRODUCT_LIST_SUCCESS,
@@ -66,8 +66,8 @@ export const listProducts = (keyword = '') => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: PRODUCT_LIST_FAIL,
-            payload: error.response && error.response.data.detail
-                ? error.response.data.detail
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
                 : error.message,
         })
     }

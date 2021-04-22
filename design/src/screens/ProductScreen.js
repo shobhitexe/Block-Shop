@@ -158,7 +158,8 @@ function ProductScreen ({ match, history }) {
                                     <ListGroup variant='flush'>
                                          {reviews.map((review) => (
                                             <ListGroup.Item key={review[0]}>
-                                                 <strong>{userInfo ? userInfo.username : '' }</strong>
+                                                 {/* <strong>{userInfo ? userInfo.username : '' }</strong> */}
+                                                <strong>{review[0]}</strong>
                                                 <p>{review[1]}</p> 
                                             </ListGroup.Item>
                                         ))} 

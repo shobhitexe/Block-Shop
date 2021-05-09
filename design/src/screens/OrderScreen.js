@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
+import { Button, Row, Col, ListGroup, Image, Card,Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { PayPalButton } from "react-paypal-button-v2";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
+import { listProductDetails, createProductReview, loadReview } from '../actions/productActions'
+import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
 import {
   getOrderDetails,
   payOrder,
@@ -20,6 +22,8 @@ function OrderScreen({ match, history }) {
   const dispatch = useDispatch();
 
   const [sdkReady, setSdkReady] = useState(false);
+  const [comment, setComment] = useState('')
+  const [reviews, setReviews] = useState([])
 
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, error, loading } = orderDetails;
@@ -32,6 +36,13 @@ function OrderScreen({ match, history }) {
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+
+  const productReviewCreate = useSelector(state => state.productReviewCreate)
+    const {
+        loading: loadingProductReview,
+        error: errorProductReview,
+        success: successProductReview,
+    } = productReviewCreate
 
   if (!loading && !error) {
     order.itemsPrice = order.orderItems
@@ -75,7 +86,14 @@ function OrderScreen({ match, history }) {
         setSdkReady(true);
       }
     }
-  }, [dispatch, order, orderId, successPay, successDeliver]);
+
+    if (successProductReview) {
+      setComment('')
+      dispatch({ type: PRODUCT_CREATE_REVIEW_RESET })
+    }
+    
+
+  }, [dispatch, order, orderId, successPay, successDeliver,successProductReview]);
 
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(orderId, paymentResult));
@@ -84,7 +102,21 @@ function OrderScreen({ match, history }) {
   const deliverHandler = () => {
     dispatch(deliverOrder(order));
   };
-
+  (async() =>
+    {
+        setReviews(await loadReview(match.params.id))
+    })()
+  const submitHandler = (e) => {
+    
+    e.preventDefault()
+    order.orderItems.map((item)=> (
+      console.log(item.product),
+      dispatch(createProductReview(
+        item.product,
+        document.getElementById('comment').value
+      ))
+    ))
+  }
   return loading ? (
     <Loader />
   ) : error ? (
@@ -133,7 +165,56 @@ function OrderScreen({ match, history }) {
                 <Message variant="warning">Not Paid</Message>
               )}
             </ListGroup.Item>
+            {order.isPaid ? (
+            <ListGroup.Item>
+              <h4>Write a review</h4>
 
+              {loadingProductReview && <Loader />}
+              {successProductReview && <Message variant='success'>Review Submitted</Message>}
+              {errorProductReview && <Message variant='danger'>{errorProductReview}</Message>}
+
+              {userInfo ? (
+                  <Form onSubmit={submitHandler}>
+                      {/* <Form.Group controlId='rating'>
+                          <Form.Label>Rating</Form.Label>
+                          <Form.Control
+                              as='select'
+                              value={rating}
+                              onChange={(e) => setRating(e.target.value)}
+                          >
+                              <option value=''>Select...</option>
+                              <option value='1'>1 - Poor</option>
+                              <option value='2'>2 - Fair</option>
+                              <option value='3'>3 - Good</option>
+                              <option value='4'>4 - Very Good</option>
+                              <option value='5'>5 - Excellent</option>
+                          </Form.Control>
+                      </Form.Group> */}
+
+                      <Form.Group controlId='comment'>
+                          <Form.Label>Review</Form.Label>
+                          <Form.Control
+                              as='textarea'
+                              row='5'
+                              value={comment}
+                              onChange={(e) => setComment(e.target.value)}
+                          ></Form.Control>
+                      </Form.Group>
+
+                      <Button
+                          disabled={loadingProductReview}
+                          type='submit'
+                          variant='primary'
+                      >
+                          Submit
+                      </Button>
+
+                  </Form>
+              ) : (
+                      <Message variant='info'>Please <Link to='/login'>login</Link> to write a review</Message>
+                  )}
+            </ListGroup.Item>
+            ): (<Message variant="warning">Cant Review</Message>)}
             <ListGroup.Item>
               <h2>Order Items</h2>
               {order.orderItems.length === 0 ? (

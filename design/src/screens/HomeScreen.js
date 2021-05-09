@@ -5,11 +5,15 @@ import Product from '../components/Product'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { listProducts } from '../actions/productActions'
+import ProductCarousel from '../components/ProductCarousel'
+
 
 function HomeScreen() {
   const dispatch =useDispatch()
   const productList = useSelector(state => state.productList)
   const {error,loading,products} = productList
+
+
   useEffect(()=>{
       dispatch(listProducts())
     },[dispatch])
@@ -17,6 +21,7 @@ function HomeScreen() {
   return (
     <Row>
     <div>
+      <ProductCarousel />
       <h1>Latest Products</h1>
       {loading ? <Loader/>
        : error ? <Message variant='danger'>{error}</Message> 

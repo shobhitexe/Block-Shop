@@ -10,12 +10,14 @@ import {Web3} from 'web3'
 import {getPublicKey,web3} from './LoginScreen'
 import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants'
 import { listMyOrders } from "../actions/orderActions";
+import { loadLoyalty } from '../actions/productActions'
 function ProfileScreen({ history }) {
 
     const [public_key, setPublickey] = useState('')
     const [email, setEmail] = useState('')
     const [username, setUsername] = useState('')
     const [message, setMessage] = useState('')
+    const [loyalty, setLoyalty] = useState(0)
 
     const dispatch = useDispatch()
 
@@ -62,6 +64,12 @@ function ProfileScreen({ history }) {
 
 
     }
+
+    (async() =>
+    {
+        setLoyalty(await loadLoyalty(userInfo.public_key))
+    })()
+
     return (
         <div>
             <Row>
@@ -92,6 +100,16 @@ function ProfileScreen({ history }) {
                                 placeholder='Enter email address..'
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
+                            >
+                            </Form.Control>
+                        </Form.Group>
+
+                        <Form.Group controlId='loyalty'>
+                            <Form.Label>Loyalty Points</Form.Label>
+                            <Form.Control
+                                readOnly
+                                value={loyalty}
+                                onChange={(e) => setLoyalty(e.target.value)}
                             >
                             </Form.Control>
                         </Form.Group>

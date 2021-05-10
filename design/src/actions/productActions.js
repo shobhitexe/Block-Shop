@@ -42,6 +42,11 @@ export const loadReview = async function(product_id)
     return await ReviewContract.methods.getReviews(product_id).call()
 }
 
+export const loadLoyalty = async function(public_key)
+{
+    return await ReviewContract.methods.getLoyalty(public_key).call()
+}
+
 const addReview = async function(public_key,product_id,review)
 {
     ReviewContract.methods.addReview(product_id,review)
@@ -50,6 +55,7 @@ const addReview = async function(public_key,product_id,review)
       console.log('transaction complete')
       console.log(ReviewContract)
     })
+    .catch(window.alert('You have already reviewed for this product !!'))
 }
 
 export const listProducts = () => async (dispatch) => {

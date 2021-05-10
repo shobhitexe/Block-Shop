@@ -10,7 +10,7 @@ contract Review
     }
     mapping(uint => ProductReview[]) product_reviews;
     mapping(address => uint) loyalty;
-    mapping(address => mapping(uint => bool)) review_tokens;
+    mapping(address => mapping(uint => bool)) has_reviewed;
     function getReviews(uint product_id) external view returns (ProductReview[] memory)
     {
         return product_reviews[product_id];
@@ -21,24 +21,14 @@ contract Review
         return product_reviews[product_id].length;
     }
     
-    
     function addReview(uint product_id , string memory review) external 
     {
-        review_tokens[msg.sender][product_id]=false;
+        require (has_reviewed[msg.sender][product_id]==false,"You have already reviewed for this product!!");
+        has_reviewed[msg.sender][product_id]=true;
         product_reviews[product_id].push(ProductReview(msg.sender,review));
         loyalty[msg.sender]+=100;
     }
-    
-    function getReviewToken(address user, uint product_id) external view returns (bool)
-    {
-        return review_tokens[user][product_id];
-    }
-    
-    function addReviewTokens(address user, uint product_id) external 
-    {
-        review_tokens[user][product_id]=true;
-    }
-    
+  
     function getLoyalty(address user) external view returns (uint)
     {
         return loyalty[user];

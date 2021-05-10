@@ -1,4 +1,4 @@
-export const REVIEW_ADDRESS = '0x414DeDCd9fCdc027243DF4D454cd1d62a13959A8'
+export const REVIEW_ADDRESS = '0xa1EdD8a1F0d0172BE4bd70abe04Ee5b480dc2fA8'
 
 export const REVIEW_ABI = [
   {
@@ -67,49 +67,6 @@ export const REVIEW_ABI = [
       }
     ],
     "name": "addReview",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "user",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "product_id",
-        "type": "uint256"
-      }
-    ],
-    "name": "getReviewToken",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "user",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "product_id",
-        "type": "uint256"
-      }
-    ],
-    "name": "addReviewTokens",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

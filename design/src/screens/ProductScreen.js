@@ -9,10 +9,12 @@ import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 
+
 function ProductScreen ({ match, history }) {
     const [qty, setQty] = useState(1)
     const [comment, setComment] = useState('')
     const [reviews, setReviews] = useState([])
+    const [connectionEstablished, setConnectionEstablished] = useState(true)
 
     const dispatch = useDispatch()
 
@@ -44,7 +46,14 @@ function ProductScreen ({ match, history }) {
     }
     (async() =>
     {
-        setReviews(await loadReview(match.params.id))
+        try
+        {
+            setReviews(await loadReview(match.params.id))
+        }
+        catch
+        {
+            setConnectionEstablished(false)
+        }
     })()
     const submitHandler = (e) => {
         e.preventDefault()
@@ -152,9 +161,12 @@ function ProductScreen ({ match, history }) {
 
                              <Row>
                                 <Col md={6}>
-                                    <h4>Reviews</h4>
-                                    {reviews.length === 0 && <Message variant='info'>No Reviews</Message>}
-
+                                    <h4 style={{marginTop: '30px'}} >Reviews</h4>
+                                    {connectionEstablished && reviews.length === 0 && <Message variant='info'>No Reviews</Message>}
+                                    {!connectionEstablished && <Message variant='danger'>Failed to Load Reviews. 
+                                    Please ensure that you have metamask installed and that you
+                                    connect to the Dapp using metamask with a valid ethereum account. For more information please <Link to="/help">Click Here</Link>
+                                    </Message>}
                                     <ListGroup variant='flush'>
                                          {reviews.map((review) => (
                                             <ListGroup.Item key={review[0]}>
@@ -175,7 +187,7 @@ function ProductScreen ({ match, history }) {
             }
 
 
-        </div >
+        </div > 
     )
 }
 

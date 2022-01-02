@@ -52,10 +52,8 @@ const addReview = async function(public_key,product_id,review)
     ReviewContract.methods.addReview(product_id,review)
     .send({ from: public_key })
     .once('receipt', async (receipt) => {
-      console.log('transaction complete')
-      console.log(ReviewContract)
-    })
-    .catch(window.alert('You have already reviewed for this product !!'))
+    }).then(() => {window.alert('Success : Review added successfully !!')})
+    .catch((err)=>{window.alert('Error : Cannot review a product more than once !!')})
 }
 
 export const listProducts = () => async (dispatch) => {
@@ -257,20 +255,7 @@ export const createProductReview = (productId, review) => async (dispatch, getSt
             userLogin: { userInfo },
         } = getState()
 
-        console.log('hi',userInfo.public_key)
         await addReview(userInfo.public_key,productId,review)
-        // const config = {
-        //     headers: {
-        //         'Content-type': 'application/json',
-        //         Authorization: `Bearer ${userInfo.token}`
-        //     }
-        // }
-
-        // const { data } = await axios.post(
-        //     `/api/products/${productId}/reviews/`,
-        //     review,
-        //     config
-        // )
         dispatch({
             type: PRODUCT_CREATE_REVIEW_SUCCESS,
         })

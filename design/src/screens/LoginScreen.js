@@ -6,10 +6,12 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 import FormContainer from '../components/FormContainer'
 import { login } from '../actions/userActions'
+import MetamaskAlertScreen from './MetamaskAlertScreen'
 // import {getPublicKey,sign_message,generateNonce} from '../metamask'
 import $ from "jquery";
 const Web3 = require("web3");
 
+export var metamaskInstalled = true
 export let web3;
 
 export const getPublicKey = function()
@@ -23,8 +25,8 @@ export const getPublicKey = function()
   .catch(
   () =>
     {
-      alert("Please install MetaMask to use this dApp!");
-      console.log("install meta!!!")
+        console.log('hi')
+        metamaskInstalled = false
     }
   )
 }
@@ -63,7 +65,7 @@ function getMetamaskAccounts()
     {
         if (err)
         {
-            console.log(err);
+            window.alert('Could not retrieve Metamask Account !!')
         }
         else
         {
@@ -71,19 +73,20 @@ function getMetamaskAccounts()
             {
                 const public_address=res[0]
                 $("#public_key").val(public_address)
-                console.log(public_address)
             }
             else
             {
-                console.log("No accounts detected !! ")
+                metamaskInstalled = false
             }
         }
     })
 }
 
+
+
 function LoginScreen({ location, history }) {
     const [public_key, setPublickey] = useState('')
-
+    console.log('hello')
     const dispatch = useDispatch()
 
     const redirect = location.search ? location.search.split('=')[1] : '/'
@@ -106,21 +109,27 @@ function LoginScreen({ location, history }) {
     const metamaskLogin = (e) =>
     {
         e.preventDefault()
-        const nonce = generateNonce()
-        const public_address= document.getElementById('public_key').value
-        sign_message(nonce,public_address)
+        try
+        {
+            const nonce = generateNonce()
+            const public_address= document.getElementById('public_key').value
+            sign_message(nonce,public_address)
+        }
+        catch
+        {
+            metamaskInstalled = false
+        }
     }
 
     function validate_user(public_address, validation_address)
     {
         if (public_address.toLowerCase()===validation_address)
         {
-            console.log("LOGIN SUCCESSFULL !!")
             submitHandler(public_address)
         }
         else
         {
-            console.log("LOGIN FAIL !!")
+            window.alert("Authentication Failed !!")
         }
     }
 
@@ -131,12 +140,11 @@ function LoginScreen({ location, history }) {
         {
             if (err)
             {
-                console.log(err)
+                window.alert('Failed to verify.. try again later..')
             }
             else
             {
                 const validation_address=result
-                console.log(validation_address)
                 validate_user(public_address, validation_address);
             }
         })
@@ -149,12 +157,11 @@ function LoginScreen({ location, history }) {
         {
             if (err)
             {
-                console.log(err)
+                window.alert('Failed to sign message!!')
             }
             else
             {
                 const signature=result
-                console.log(signature)
                 recover_address(nonce,signature,public_address);
             }
         })
@@ -162,10 +169,12 @@ function LoginScreen({ location, history }) {
 
 
     return (
-        <FormContainer>
-            <h1>Sign In</h1>
+            <FormContainer>
             {error && <Message variant='danger'>{error}</Message>}
             {loading && <Loader />}
+            {!metamaskInstalled ? (<MetamaskAlertScreen/>) :
+            (<FormContainer>
+            <h1>Sign In</h1>
             <Form onSubmit={metamaskLogin}>
 
                 <Form.Group controlId='public_key'>
@@ -178,12 +187,11 @@ function LoginScreen({ location, history }) {
                     >
                     </Form.Control>
                 </Form.Group>
-
+                
                 <Button type='submit' variant='primary'>
                     Sign In
                 </Button>
             </Form>
-
             <Row className='py-3'>
                 <Col>
                     New Customer? <Link
@@ -192,7 +200,8 @@ function LoginScreen({ location, history }) {
                         </Link>
                 </Col>
             </Row>
-
+            </FormContainer>) 
+            }
         </FormContainer>
     )
 }

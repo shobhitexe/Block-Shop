@@ -5,11 +5,6 @@ import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { listProductDetails, createProductReview, loadReview } from '../actions/productActions'
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
-import {
-    getOrderDetails,
-    payOrder,
-    deliverOrder,
-  } from "../actions/orderActions";
 
 function Comment( { item }) {
     
@@ -34,8 +29,6 @@ function Comment( { item }) {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        // console.log(item),
-        
         dispatch(createProductReview(
         item,
         document.getElementById(item).value
@@ -44,7 +37,7 @@ function Comment( { item }) {
     
     return (
         <div>
-            <ListGroup.Item>
+            <ListGroup.Item style={{marginTop: '30px'}}>
             <h4>Write a review</h4>
             {loadingProductReview && <Loader />}
             {successProductReview && <Message variant='success'>Review Submitted</Message>}
@@ -67,7 +60,7 @@ function Comment( { item }) {
                         type='submit'
                         variant='primary'
                     >
-                        Submit
+                        Submit Review
                     </Button>
 
                 </Form> 

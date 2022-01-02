@@ -8,6 +8,7 @@ import FormContainer from '../components/FormContainer'
 import { register } from '../actions/userActions'
 import {Web3} from 'web3'
 import {getPublicKey,web3} from './LoginScreen'
+import MetamaskAlertScreen from './MetamaskAlertScreen'
 
 
 
@@ -17,6 +18,7 @@ function RegisterScreen({ location, history }) {
     const [email, setEmail] = useState('')
     const [username, setUsername] = useState('')
     const [message, setMessage] = useState('')
+    const [metamaskInstalled,setMetamaskInstalled] = useState(true)
 
     const dispatch = useDispatch()
 
@@ -36,22 +38,28 @@ function RegisterScreen({ location, history }) {
     const submitHandler = (e) => {
         e.preventDefault()
         const public_address=document.getElementById('public_key').value
-        if (!web3.utils.isAddress(public_address)) {
-            setMessage('Invalid ethereum address..')
-        } else {
-            console.log()
-            dispatch(register(public_address, email, username))
+        try
+        {
+            if (!web3.utils.isAddress(public_address)) {
+                setMessage('Invalid ethereum address..')
+            } else {
+                dispatch(register(public_address, email, username))
+            }
         }
-
-
+        catch
+        {
+            setMetamaskInstalled(false)
+        }
     }
 
     return (
         <FormContainer>
-            <h1>Sign In</h1>
             {message && <Message variant='danger'>{message}</Message>}
             {error && <Message variant='danger'>{error}</Message>}
             {loading && <Loader />}
+            {! metamaskInstalled ? (<MetamaskAlertScreen/>) :
+            (<FormContainer>
+            <h1>Sign In</h1>
             <Form onSubmit={submitHandler}>
 
                 <Form.Group controlId='username'>
@@ -104,6 +112,7 @@ function RegisterScreen({ location, history }) {
                         </Link>
                 </Col>
             </Row>
+            </FormContainer >)}
         </FormContainer >
     )
 }

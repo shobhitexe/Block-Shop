@@ -45,6 +45,7 @@ function OrderScreen({ match, history }) {
         success: successProductReview,
     } = productReviewCreate
 
+
   if (!loading && !error) {
     order.itemsPrice = order.orderItems
       .reduce((acc, item) => acc + item.price * item.qty, 0)
@@ -107,11 +108,12 @@ function OrderScreen({ match, history }) {
     {
         setReviews(await loadReview(match.params.id))
     })()
+    
   const submitHandler = (e) => {
     
     e.preventDefault()
     order.orderItems.map((item)=> (
-      console.log(item.product),
+  
       dispatch(createProductReview(
         item.product,
         document.getElementById('comment').value
@@ -172,7 +174,7 @@ function OrderScreen({ match, history }) {
               {order.orderItems.length === 0 ? (
                 <Message variant="info">Order is empty</Message>
               ) : (
-                <ListGroup variant="flush">
+                <ListGroup variant="flush" style={{marginBottom : '40px'}}>
                   {order.orderItems.map((item, index) => (
                     <ListGroup.Item key={index}>
                       
@@ -197,10 +199,11 @@ function OrderScreen({ match, history }) {
                           {(item.qty * item.price).toFixed(2)}
                         </Col>
                       </Row>
+                      <Row style = {{marginTop : '2px'}}></Row>
                       {order.isPaid ? (
                         <Comment item={item.product}/>
                       ): (<Message variant="warning">Write review after payment</Message>)}
-                    </ListGroup.Item>       
+                    </ListGroup.Item>      
                   ))}
                 </ListGroup>
               )}

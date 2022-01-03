@@ -5,7 +5,7 @@ from .base_settings import *
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '25+7%oc(c81qh$a509py#y=zfa@&$t()z_(w))dwda&v#m0e%_v132'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

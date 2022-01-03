@@ -14,8 +14,6 @@ import PlaceOrderScreen from './screens/PlaceOrderScreen'
 import OrderScreen from './screens/OrderScreen'
 import HelpScreen from "./screens/HelpScreen";
 
-import axios from 'axios';
-
 function App() {
   return (
      <BrowserRouter>

@@ -6,10 +6,13 @@ import Loader from "../components/Loader";
 import { listProductDetails, createProductReview, loadReview } from '../actions/productActions'
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
 
+
 function Comment( { item }) {
     
     const [comment, setComment] = useState('')
     const [reviews, setReviews] = useState([])
+    const [processing, setProcessing] = useState(false)
+    const [err, setErr] = useState('')
     const dispatch = useDispatch();
 
     const productReviewCreate = useSelector(state => state.productReviewCreate)
@@ -28,13 +31,30 @@ function Comment( { item }) {
     }, [dispatch, successProductReview]);
 
     const submitHandler = (e) => {
+        setErr('')
         e.preventDefault()
+        setProcessing(true)
         dispatch(createProductReview(
         item,
         document.getElementById(item).value
         ))
     }
     
+
+    var old_alert = window.alert;
+    
+    window.alert = function(msg) 
+    { 
+        if (processing == false)
+        {
+            return
+        }
+        setProcessing(false)
+        console.log(msg)
+        setErr(msg)
+        old_alert(msg); 
+    };
+
     return (
         <div>
             <ListGroup.Item style={{marginTop: '30px'}}>
@@ -42,7 +62,9 @@ function Comment( { item }) {
             {loadingProductReview && <Loader />}
             {successProductReview && <Message variant='success'>Review Submitted</Message>}
             {errorProductReview && <Message variant='danger'>{errorProductReview}</Message>}
-            
+            {err.startsWith('Success :') && <Message variant='success'>{err}</Message>}
+            {err.startsWith('Error :') && <Message variant='danger'>{err}</Message>}
+            {processing && <Loader/>}
                 <Form onSubmit={submitHandler}>
                     <Form.Group controlId={item}>
                         <Form.Label>Review</Form.Label>

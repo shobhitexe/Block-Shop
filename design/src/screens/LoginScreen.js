@@ -25,7 +25,6 @@ export const getPublicKey = function()
   .catch(
   () =>
     {
-        console.log('hi')
         metamaskInstalled = false
     }
   )
@@ -86,7 +85,6 @@ function getMetamaskAccounts()
 
 function LoginScreen({ location, history }) {
     const [public_key, setPublickey] = useState('')
-    console.log('hello')
     const dispatch = useDispatch()
 
     const redirect = location.search ? location.search.split('=')[1] : '/'

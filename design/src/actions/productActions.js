@@ -47,13 +47,14 @@ export const loadLoyalty = async function(public_key)
     return await ReviewContract.methods.getLoyalty(public_key).call()
 }
 
+
 const addReview = async function(public_key,product_id,review)
 {
     ReviewContract.methods.addReview(product_id,review)
     .send({ from: public_key })
     .once('receipt', async (receipt) => {
     }).then(() => {window.alert('Success : Review added successfully !!')})
-    .catch((err)=>{window.alert('Error : Cannot review a product more than once !!')})
+    .catch((err)=>{window.alert('Error : ' + err.message)})
 }
 
 export const listProducts = () => async (dispatch) => {

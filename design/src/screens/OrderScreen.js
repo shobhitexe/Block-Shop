@@ -202,7 +202,8 @@ function OrderScreen({ match, history }) {
                       <Row style = {{marginTop : '2px'}}></Row>
                       {order.isPaid ? (
                         <Comment item={item.product}/>
-                      ): (<Message variant="warning">Write review after payment</Message>)}
+                      ): (<Row style = {{marginTop : '20px'}}>
+                      <Message  variant="warning">Write review after payment</Message></Row>)}
                     </ListGroup.Item>      
                   ))}
                 </ListGroup>

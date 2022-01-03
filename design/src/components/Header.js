@@ -27,8 +27,12 @@ function Header() {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ml-auto">
 
+                            <LinkContainer to='/help'>
+                                <Nav.Link ><i class="fas fa-info-circle"></i> Help</Nav.Link>
+                            </LinkContainer>
+
                             <LinkContainer to='/cart'>
-                                <Nav.Link ><i className="fas fa-shopping-cart"></i>Cart</Nav.Link>
+                                <Nav.Link style={{marginLeft:'10px'}}><i className="fas fa-shopping-cart"></i> Cart</Nav.Link>
                             </LinkContainer>
 
                             {userInfo ? (

@@ -36,7 +36,7 @@ export const login = (public_key) => async (dispatch) => {
         }
 
         const { data } = await axios.post(
-            '/api/users/login/',
+            'https://blockshopbackend.pythonanywhere.com/api/users/login/',
             { 'public_key': public_key, 'password': 'hello' },
             config
         )
@@ -80,7 +80,7 @@ export const register = (public_key, email, username) => async (dispatch) => {
         }
 
         const { data } = await axios.post(
-            '/api/users/register/',
+            'https://blockshopbackend.pythonanywhere.com/api/users/register/',
             { 'public_key': public_key, 'email': email, 'username': username, 'password': 'hello' },
             config
         )
@@ -125,7 +125,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
             }
         }
         const { data } = await axios.get(
-            `/api/users/${id}/`,
+            `https://blockshopbackend.pythonanywhere.com/api/users/${id}/`,
             config
         )
         
@@ -163,7 +163,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
             }
         }
         const { data } = await axios.put(
-            `/api/users/profile/update/`,
+            `https://blockshopbackend.pythonanywhere.com/api/users/profile/update/`,
             user,
             config
         )

@@ -1,7 +1,5 @@
 {
   "name": "design",
-  "homepage": ".",
-  "proxy": "https://blockshopbackend.pythonanywhere.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

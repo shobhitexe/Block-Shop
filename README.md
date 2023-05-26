@@ -5,6 +5,7 @@
 3. Read untampered product reviews stored in the blockchain
 4. Gain loyalty points for writing reviews 
 6. Review each product only once after purchasing the product to prevent spamming fake reviews
+<br>
 
 ## Tech Stack
 1. Front-End 
@@ -16,6 +17,7 @@
 2. Back-End
     * Python django framework for back-end database and API calls
     * Solidity used for writing smart contract to store product reviews in the blockchain
+<br>
 
 ## Installation
 1. Instructions to visit web application
@@ -28,7 +30,8 @@
    * In the back-end root directory of project, type `python manage.py runserver` in command prompt
    * In the front-end root directory of project, type `npm start` in command prompt
    * Visit the front-end link and explore the webapp
- 
+<br>
+
 ## Screenshots
 
 ### Landing Page

@@ -33,22 +33,30 @@
 
 ### Landing Page
 ![land](https://user-images.githubusercontent.com/73059947/148222358-15ef78df-14b1-4287-82cf-47dbaa887d0f.png)
-
+<br>
+<br>
+<br>
 
 
 ### Product Description and Review Section 
 ![product](https://user-images.githubusercontent.com/73059947/148222405-7ca1180d-bd89-4b9e-9d97-8056840dc47c.png)
-
+<br>
+<br>
+<br>
 
 
 ### User Profile and Orders Section
 ![profile](https://user-images.githubusercontent.com/73059947/148222479-25b0d1e7-c860-4bdc-a073-03ef06f436c2.png)
-
+<br>
+<br>
+<br>
 
 
 ### Order Payment and Review Writing Section
 ![payment](https://user-images.githubusercontent.com/73059947/148222560-4fa69fcd-7135-4276-b2a0-6927953d9074.png)
-
+<br>
+<br>
+<br>
 
 
 ### User Cart Page

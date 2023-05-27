@@ -4,7 +4,8 @@
 2. Submit reviews for products
 3. Read untampered product reviews stored in the blockchain
 4. Gain loyalty points for writing reviews 
-6. Review each product only once after purchasing the product to prevent spamming fake reviews
+5. Review each product only once after purchasing the product to prevent spamming fake reviews
+6. Secure authentication using Digital Signature Verification
 <br>
 
 ## Tech Stack
@@ -21,7 +22,9 @@
 
 ## Installation
 1. Instructions to visit web application
-   * visit link : https://blockshop-web.herokuapp.com/
+   * Visit link : https://blockshop.netlify.app/
+   * Connect Metamask wallet with the DApp
+   * Switch to Sepolia Test Network in Metamask as smart contract has been deployed on Sepolia Test Network
 
 2. Instructions to RUN the project locally
    * Download the project folder
@@ -29,27 +32,40 @@
    * Install necessary dependencies by typing `npm install` in command prompt in the folder containing package.json file
    * In the back-end root directory of project, type `python manage.py runserver` in command prompt
    * In the front-end root directory of project, type `npm start` in command prompt
-   * Visit the front-end link and explore the webapp
+   * Visit the front-end link and explore the DApp
+   * Connect Metamask wallet with the DApp
+   * Switch to Sepolia Test Network in Metamask as smart contract has been deployed on Sepolia Test Network
 <br>
 
 ## Screenshots
 
 ### Landing Page
-![land](https://user-images.githubusercontent.com/73059947/148222358-15ef78df-14b1-4287-82cf-47dbaa887d0f.png)
+![image](https://github.com/shobhitmir/Block-Shop/assets/73059947/d8eb2f16-7954-4c0e-bd89-ecde54404c5f)
+<br>
+<br>
+![image](https://github.com/shobhitmir/Block-Shop/assets/73059947/5bb3fa63-4dc2-4423-b882-fb976570ca28)
 <br>
 <br>
 <br>
 
 
-### Product Description and Review Section 
-![product](https://user-images.githubusercontent.com/73059947/148222405-7ca1180d-bd89-4b9e-9d97-8056840dc47c.png)
+### Login Page
+![image](https://github.com/shobhitmir/Block-Shop/assets/73059947/74af38dd-d125-4d95-93a4-0fa5d5a7596a)
 <br>
 <br>
 <br>
+
 
 
 ### User Profile and Orders Section
 ![profile](https://user-images.githubusercontent.com/73059947/148222479-25b0d1e7-c860-4bdc-a073-03ef06f436c2.png)
+<br>
+<br>
+<br>
+
+
+### User Cart Page
+![cart](https://user-images.githubusercontent.com/73059947/148222829-004ada5f-12d6-40e4-9dc8-bd6a39b6369f.png)
 <br>
 <br>
 <br>
@@ -62,5 +78,18 @@
 <br>
 
 
-### User Cart Page
-![cart](https://user-images.githubusercontent.com/73059947/148222829-004ada5f-12d6-40e4-9dc8-bd6a39b6369f.png)
+### Making Payment using PayPal Test Card
+![image](https://github.com/shobhitmir/Block-Shop/assets/73059947/3a0a1831-4675-4c84-9d26-5466f97861b4)
+<br>
+<br>
+<br>
+
+### Writing a Review
+![image](https://github.com/shobhitmir/Block-Shop/assets/73059947/5eb9120a-3b55-4da9-ac7d-4985212020c6)
+<br>
+<br>
+<br>
+
+
+### Product Description and Review Section 
+![image](https://github.com/shobhitmir/Block-Shop/assets/73059947/6acf1056-e723-48b6-b540-206a9639674f)

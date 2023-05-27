@@ -16,7 +16,7 @@
     * Javascript used for bulding a dynamic web application
     
 2. Back-End
-    * Python django framework for back-end database and API calls
+    * Python django framework used for back-end database and API calls
     * Solidity used for writing smart contract to store product reviews in the blockchain
 <br>
 

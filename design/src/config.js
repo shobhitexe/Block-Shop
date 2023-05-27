@@ -1,4 +1,4 @@
-export const REVIEW_ADDRESS = '0x024dd0Ec8f1b9e4Ab95e36cA4bE98682CD68dd87'
+export const REVIEW_ADDRESS = '0xE31cb38386921746dEA0dD048586Eb041F8b5eF6'
 
 export const REVIEW_ABI = [
   {

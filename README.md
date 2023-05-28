@@ -1,4 +1,9 @@
 # Block-Shop
+Block-Shop is a decentralized e-commerce platform that leverages Blockchain technology to store product reviews. Nowadays many individuals purchase products online. Such individuals rely on the product reviews to decide whether to purchase a product or not. However, a centralized e-commerce platform faces issues such as fake/modified product reviews. Block-Shop solves such issues by using Blockchain technology to provide untampered product reviews to users, thus creating a trustworthy and reliable environment for users to purchase products
+<br>
+<br>
+
+
 ## Features
 1. Purchase products
 2. Submit reviews for products
